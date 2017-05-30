@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 Route::resource('flyers', 'FlyersController');
 Route::get('{area}/{address}', 'FlyersController@show');
+Route::get('{area}/{address}/photos', 'FlyersController@addPhoto');

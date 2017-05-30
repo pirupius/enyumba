@@ -16,6 +16,16 @@ class Flyers extends Model
         'description'
     ];
 
+    public function scopeLocatedAt($query, $area, $address){
+        $address = str_replace('-',' ', $address);
+        
+        return $query->where(compact('area','address'));
+    }
+
+    public function getPriceAttribute($price){
+        return 'UGX ' . number_format($price);
+    }
+
     public function FlyerPhotos(){
         return $this->hasMany('App\FlyerPhotos');
     }

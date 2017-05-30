@@ -28,8 +28,7 @@ class FlyersController extends Controller
      */
     public function create()
     {
-        // flash()->success('You have arrived', 'message bot');
-        flash()->overlay('Welcome aboard', 'Thank you for signing up');
+        //flash()->overlay('Welcome aboard', 'Thank you for signing up');
         
         return view('flyers.create');
     }
@@ -58,8 +57,12 @@ class FlyersController extends Controller
     public function show($area, $address)
     {
         
-        $address = str_replace('-',' ', $address);
-        return Flyers::where(compact('area','address'))->first();
+        $flyer = Flyers::locatedAt($area, $address)->first();
+        return view('flyers.show', compact('flyer'));
+    }
+
+    public function addPhoto(){
+        
     }
 
     /**

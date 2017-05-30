@@ -30,6 +30,9 @@
     <script src="{{asset('js/sweetalert-dev.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 
+    <!--dropzone CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,10 +86,10 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i>Home</a>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i>Home</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-plus fa-fw"></i>Create Flyer</a>
+                            <a href="/flyers/create"><i class="fa fa-plus fa-fw"></i>Create Flyer</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i>All Flyers</a>
@@ -127,6 +130,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('dist/js/sb-admin-2.js')}}"></script>
+    @yield('scripts.footer')
 
     @include('flash')
 
