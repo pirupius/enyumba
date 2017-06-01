@@ -29,8 +29,7 @@ class FlyerRequest extends FormRequest
             'address' => 'required',
             'district' => 'required',
             'price' => 'required|integer',
-            'description' => 'required',
-
+            'description' => 'required'
         ];
     }
 }

@@ -17,5 +17,7 @@ Route::get('/', function () {
 });
 
 Route::resource('flyers', 'FlyersController');
+
 Route::get('{area}/{address}', 'FlyersController@show');
-Route::get('{area}/{address}/photos', 'FlyersController@addPhoto');
+// Route::post('{area}/{address}/photos', 'FlyersController@addPhoto');
+Route::post('{area}/{address}/photos', ['as'=>'store_photo_path', 'uses'=>'FlyersController@addPhoto']);
