@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Flyers extends Model
+class Flyer extends Model
 {
     //
     protected $fillable = [
@@ -16,17 +16,21 @@ class Flyers extends Model
         'description'
     ];
 
-    public function scopeLocatedAt($query, $area, $address){
+    public static function locatedAt($area, $address){
         $address = str_replace('-',' ', $address);
         
-        return $query->where(compact('area','address'));
+        return static::where(compact('area','address'))->first();
+    }
+
+    public function addPhoto(Photo $photo){
+        return $this->photo()->save($photo);
     }
 
     public function getPriceAttribute($price){
         return 'UGX ' . number_format($price);
     }
 
-    public function FlyerPhotos(){
-        return $this->hasMany('App\FlyerPhotos');
+    public function Photo(){
+        return $this->hasMany('App\Photo');
     }
 }

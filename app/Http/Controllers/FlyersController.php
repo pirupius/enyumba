@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FlyerRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Utilities\Country;
-use App\Flyers;
+use App\Flyer;
+use App\Photo;
 
 class FlyersController extends Controller
 {
@@ -41,7 +42,7 @@ class FlyersController extends Controller
      */
     public function store(FlyerRequest $request)
     {
-        Flyers::create($request->all());
+        Flyer::create($request->all());
 
         flash()->success('Success', 'New listing created successfully!');
 
@@ -57,12 +58,23 @@ class FlyersController extends Controller
     public function show($area, $address)
     {
         
-        $flyer = Flyers::locatedAt($area, $address)->first();
+        $flyer = Flyer::locatedAt($area, $address);
+
         return view('flyers.show', compact('flyer'));
     }
 
-    public function addPhoto(){
+    public function addPhoto($area, $address, Request $request){
+        $this->validate($request, [
+            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+        ]);
         
+        // $file->move('imgs/flyers/photos', $name);
+
+        $photo = Photo::fromForm($request->file('photo'));
+
+        Flyer::locatedAt($area, $address)->addPhoto($photo);
+
+        // return 'Done';
     }
 
     /**
