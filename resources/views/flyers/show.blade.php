@@ -1,21 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="col-lg-12">
+    <div class="col-md-4">
         <h1 class="page-header">{!! $flyer-> name !!}</h1>
         <h2>{!! $flyer->price !!}</h2>
-    </div>
-    <div class="col-lg-12">
-        <div class="col-md-6">
-            <div class="description">{!! nl2br($flyer->description) !!}</div>
-        </div>
-        <div class="col-md-4">
-            @foreach ($flyer->photo as $photo)
-                <img src="/{{ $photo -> path }}" alt="" width="100%"/>
-            @endforeach
-        </div>
 
-        
+        <div class="description">{!! nl2br($flyer->description) !!}</div>
+    </div>
+    
+    <div class="col-md-8">
+        @foreach ($flyer->photo->chunk(4) as $set)
+            <div class="row" style="margin-top:20px;">
+                @foreach ($flyer->photo as $photo)
+                    <img src="/{{ $photo -> thumbnail_path }}" alt=""/>
+                @endforeach
+            </div>
+        @endforeach
     </div>
 
     <div class="col-lg-12">

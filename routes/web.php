@@ -17,7 +17,12 @@ Route::get('/', function () {
 });
 
 Route::resource('flyers', 'FlyersController');
+Route::get('/listings', 'FlyersController@allFlyers');
 
 Route::get('{area}/{address}', 'FlyersController@show');
 // Route::post('{area}/{address}/photos', 'FlyersController@addPhoto');
 Route::post('{area}/{address}/photos', ['as'=>'store_photo_path', 'uses'=>'FlyersController@addPhoto']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

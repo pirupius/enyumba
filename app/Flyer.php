@@ -19,7 +19,7 @@ class Flyer extends Model
     public static function locatedAt($area, $address){
         $address = str_replace('-',' ', $address);
         
-        return static::where(compact('area','address'))->first();
+        return static::where(compact('area','address'))->firstOrFail();
     }
 
     public function addPhoto(Photo $photo){

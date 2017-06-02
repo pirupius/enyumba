@@ -16,7 +16,7 @@ class CreateFlyersTable extends Migration
         Schema::create('flyers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('area', 20);
+            $table->string('area');
             $table->string('address');
             $table->string('district');
             $table->integer('price');
