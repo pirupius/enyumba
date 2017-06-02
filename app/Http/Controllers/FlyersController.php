@@ -10,6 +10,8 @@ use App\Http\Utilities\Country;
 use App\Flyer;
 use App\Photo;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 class FlyersController extends Controller
 {
     /**
@@ -68,13 +70,21 @@ class FlyersController extends Controller
             'photo' => 'required|mimes:jpg,jpeg,png,bmp'
         ]);
         
-        // $file->move('imgs/flyers/photos', $name);
-
-        $photo = Photo::fromForm($request->file('photo'));
+        $photo = $this->makePhoto($request->file('photo'));
 
         Flyer::locatedAt($area, $address)->addPhoto($photo);
+    }
 
-        // return 'Done';
+    public function makePhoto(UploadedFile $file){
+        // return Photo::fromForm($file)->store($file);
+        return Photo::named($file->getClientOriginalname())->move($file);
+    }
+
+    public function allFlyers(Request $request){
+        $listings = Flyer::all();
+
+        // return view('flyers.all_flyers.blade.php', compact('flyers'));
+        return $listings;
     }
 
     /**

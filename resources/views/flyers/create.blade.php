@@ -12,46 +12,46 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <form role="form" method="POST" action="/flyers" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <div class="form-group">
-                                <label>Title</label>
-                                <input class="form-control" type="text" name="name" required placeholder="Name of listing">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input class="form-control" type="text" name="name" required placeholder="Name of listing">
+                                </div>
+                                <div class="form-group">
+                                    <label>Area</label>
+                                    <input class="form-control" type="text" name="area" required placeholder="Location/Area name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" type="text" name="address" required= placeholder="describe the address">
+                                </div>
+                                <div class="form-group">
+                                    <label>Select district</label>
+                                    <select class="form-control" name="district" required>
+                                        <option>Kampala</option>
+                                        <option>Mukono</option>
+                                        <option>Entebbe</option>
+                                        <option>Jinja</option>
+                                        <option>Wakiso</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Area</label>
-                                <input class="form-control" type="text" name="area" required placeholder="Location/Area name">
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <input class="form-control" type="text" name="address" required= placeholder="describe the address">
-                            </div>
-                            <div class="form-group">
-                                <label>Select district</label>
-                                <select class="form-control" name="district" required>
-                                    <option>Kampala</option>
-                                    <option>Mukono</option>
-                                    <option>Entebbe</option>
-                                    <option>Jinja</option>
-                                    <option>Wakiso</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Sale price</label>
-                                <input class="form-control" type="number" name="price" required placeholder="describe the address">
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea class="form-control" type="text" name="description" required rows="3"></textarea>
-                            </div>
-                            <!--<div class="form-group">
-                                <label>Photo upload</label>
-                                <input type="file" required="required">
-                            </div>-->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Sale price</label>
+                                    <input class="form-control" type="number" name="price" required placeholder="describe the address">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" type="text" name="description" required rows="3"></textarea>
+                                </div>
 
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+                                <button type="submit" class="btn btn-default">Submit Button</button>
+                                <button type="reset" class="btn btn-default">Reset Button</button>
+                            </div>
 
                             <div class="row">
                                 @if (count($errors) > 0)
