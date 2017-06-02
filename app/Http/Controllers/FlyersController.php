@@ -81,10 +81,11 @@ class FlyersController extends Controller
     }
 
     public function allFlyers(Request $request){
-        $listings = Flyer::all();
+        // $listings = Flyer::all(); //gets all results from flyer table
+        $listings = Flyer::with('photo')->get();
 
-        // return view('flyers.all_flyers.blade.php', compact('flyers'));
-        return $listings;
+        return view('flyers.all_flyers', compact('listings'));
+        // return $listings;
     }
 
     /**

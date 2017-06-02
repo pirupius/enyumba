@@ -103,9 +103,9 @@
                         <li>
                             <a href="/listings"><i class="fa fa-table fa-fw"></i>All Flyers</a>
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
