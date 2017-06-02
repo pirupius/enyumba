@@ -2,9 +2,26 @@
 
 @section('content')
 
-    <div class="col-lg-12">
-        <h1 class="page-header">Welcome, Please click the button to create a new flyer.</h1><br/>
-        <a  href="/flyers/create" class="btn btn-primary">Create flyer</a>
+    <div class="wrapper">
+        <div class="page-wrapper" style="margin:10px;">
+            <div class="row">
+                @foreach ($listings as $listing)
+                <div class="col-lg-12 well">
+                    <div class="col-lg-4">
+                        @foreach ($listing->photo as $photo)
+                            @if ($loop->first)
+                                <img src="/{{ $photo->thumbnail_path }}" alt=""/>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col-lg-8">
+                        <h4><a href="{!! $listing->area !!}/{!! $listing->address !!}"> {!! $listing-> name !!} </a></h4>
+                        <p>{!! str_limit(nl2br($listing->description), 500) !!}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
 @endsection
