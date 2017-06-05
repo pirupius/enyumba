@@ -10,7 +10,7 @@ class Photo extends Model
 {
     protected $table = 'flyer_photos';
     protected $fillable = ['path', 'name', 'thumbnail_path'];
-    protected $baseDir = 'imgs/flyers/photos';
+    protected $baseDir = 'img/flyers';
     
     /**
      * A photo belongs to a flyer.

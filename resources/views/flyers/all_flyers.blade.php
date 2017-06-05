@@ -8,11 +8,11 @@
                 @foreach ($listings as $listing)
                 <div class="col-lg-12 well">
                     <div class="col-lg-4">
-                        @foreach ($listing->photo as $photo)
-                            @if ($loop->first)
-                                <img src="/{{ $photo->thumbnail_path }}" alt=""/>
-                            @endif
-                        @endforeach
+                        @if (count($listing->photo) > 0)
+                            <img src="/{{ $listing->photo->first()->thumbnail_path }}" alt=""/>
+                        @else
+                            <img src="{{asset('img/home.png')}}" alt="" width="180px"/>
+                        @endif
                     </div>
                     <div class="col-lg-8">
                         <h4><a href="{!! $listing->area !!}/{!! $listing->address !!}"> {!! $listing-> name !!} </a></h4>

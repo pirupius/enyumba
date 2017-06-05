@@ -8,6 +8,7 @@ class Flyer extends Model
 {
     //
     protected $fillable = [
+        'user_id',
         'name',
         'area',
         'address',
@@ -30,7 +31,12 @@ class Flyer extends Model
         return 'UGX ' . number_format($price);
     }
 
-    public function Photo(){
+    public function photo(){
         return $this->hasMany('App\Photo');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+    
 }

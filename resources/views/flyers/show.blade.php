@@ -9,18 +9,23 @@
     </div>
     
     <div class="col-md-8">
-        @foreach ($flyer->photo->chunk(4) as $set)
+        @if(count($flyer->photo) == 0)
             <div class="row" style="margin-top:20px;">
-                @foreach ($flyer->photo as $photo)
-                    <img src="/{{ $photo -> thumbnail_path }}" alt=""/>
-                @endforeach
+                <h4 style="align:center;margin-left:100px;">No images for this listing</h4>
             </div>
-        @endforeach
+        @else
+            @foreach ($flyer->photo->chunk(4) as $set)
+                <div class="row" style="margin-top:20px;">
+                    @foreach ($flyer->photo as $photo)
+                        <img src="/{{ $photo -> thumbnail_path }}" alt=""/>
+                    @endforeach
+                </div>
+            @endforeach
+        @endif
     </div>
 
     <div class="col-lg-12">
         <h3>Add your photos here</h3>
-        <!--<form id="addPhotosForm" action="/{{ $flyer->area}}/{{ $flyer->address}}/photos" method="POST" class="dropzone">-->
         <form id="addPhotosForm" 
                 action="{{ route('store_photo_path', [$flyer->area, $flyer->address]) }}" 
                 method="POST" class="dropzone">
