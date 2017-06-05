@@ -9,11 +9,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Utilities\Country;
 use App\Flyer;
 use App\Photo;
+use Auth;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FlyersController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('auth', ['except'=>['allFlyers','show']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -44,7 +50,12 @@ class FlyersController extends Controller
      */
     public function store(FlyerRequest $request)
     {
-        Flyer::create($request->all());
+        
+        $flyer = new Flyer($request->all());
+        $flyer->user_id = Auth::user()->id;
+
+        $flyer->save();
+        //Flyer::create($request->all());
 
         flash()->success('Success', 'New listing created successfully!');
 
@@ -84,8 +95,15 @@ class FlyersController extends Controller
         // $listings = Flyer::all(); //gets all results from flyer table
         $listings = Flyer::with('photo')->get();
 
-        return view('flyers.all_flyers', compact('listings'));
-        // return $listings;
+        if (count($listings)) {
+            
+            return view('flyers.all_flyers', compact('listings'));
+            // return $listings;
+
+        }else{
+            return "no records!! Please create new listings";
+        }
+        
     }
 
     /**
