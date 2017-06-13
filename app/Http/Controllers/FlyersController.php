@@ -77,16 +77,36 @@ class FlyersController extends Controller
     }
 
     public function addPhoto($area, $address, Request $request){
+        
         $this->validate($request, [
             'photo' => 'required|mimes:jpg,jpeg,png,bmp'
         ]);
+
+        $flyer = Flyer::locatedAt($area, $address);
+
+        if(! $flyer->ownedBy(\Auth::user())){
+
+            return $this->unauthorized($request);
+        }
         
         $photo = $this->makePhoto($request->file('photo'));
 
-        Flyer::locatedAt($area, $address)->addPhoto($photo);
+        $flyer->addPhoto($photo);
+    }
+
+    protected function unauthorized(Request $request){
+
+        if($request->ajax()){
+                return response(['message'=>'This is not your flyer'], 403);
+            }
+
+            flash('This is not your flyer');
+
+            return redirect('/');
     }
 
     public function makePhoto(UploadedFile $file){
+        
         // return Photo::fromForm($file)->store($file);
         return Photo::named($file->getClientOriginalname())->move($file);
     }

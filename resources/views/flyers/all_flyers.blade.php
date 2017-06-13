@@ -4,6 +4,14 @@
 
     <div class="wrapper">
         <div class="page-wrapper" style="margin:10px;">
+            <!-- <div class="form-group input-group" style="padding-top:5px;padding-bottom:5px;">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div> -->
+            
             <div class="row">
                 @foreach ($listings as $listing)
                 <div class="col-lg-12 well">
