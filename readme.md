@@ -1,4 +1,4 @@
-Please read the [wiki](https://github.com/pirupius/Laravel-House-Listings-Real-Estate/wiki/Quick-Set-up) on how to quickly set up. 
+Please read the [wiki](https://github.com/pirupius/Laravel-House-Listings-Real-Estate/wiki) on how to quickly set up. 
 
 You can also read about the [Laravel Framework](https://laravel.com/docs) used [here](https://github.com/pirupius/Laravel-House-Listings-Real-Estate/wiki/Laravel-Framework)
 
