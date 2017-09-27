@@ -274,7 +274,6 @@
                 "watermark"
             ],
             "time": "2017-04-23T18:45:36+00:00"
-<<<<<<< 98dddeb92a1d5a3a20d765ddcc99c39e2a71da00
         },
         {
             "name": "intervention/imagecache",
@@ -328,8 +327,6 @@
                 "laravel"
             ],
             "time": "2015-09-22T15:22:47+00:00"
-=======
->>>>>>> chnage ui
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -417,7 +414,6 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
-<<<<<<< 98dddeb92a1d5a3a20d765ddcc99c39e2a71da00
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -476,8 +472,6 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
-=======
->>>>>>> chnage ui
         },
         {
             "name": "laravel/framework",
@@ -1854,7 +1848,6 @@
                 "shim"
             ],
             "time": "2016-11-14T01:06:16+00:00"
-<<<<<<< 98dddeb92a1d5a3a20d765ddcc99c39e2a71da00
         },
         {
             "name": "symfony/polyfill-php56",
@@ -1963,8 +1956,6 @@
                 "shim"
             ],
             "time": "2017-07-05T15:09:33+00:00"
-=======
->>>>>>> chnage ui
         },
         {
             "name": "symfony/process",
