@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     </button>
                 </span>
             </div> -->
-            
+
             <div class="row">
                 @foreach ($listings as $listing)
                 <div class="col-lg-12 well">
