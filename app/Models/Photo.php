@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Image;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ class Photo extends Model
     protected $table = 'flyer_photos';
     protected $fillable = ['path', 'name', 'thumbnail_path'];
     protected $baseDir = 'img/flyers';
-    
+
     /**
      * A photo belongs to a flyer.
      *
@@ -19,17 +19,16 @@ class Photo extends Model
      */
     public function flyer()
     {
-        return $this->belongsTo('App\Flyer');
+        return $this->belongsTo(Flyer::class);
     }
 
-    public static function named($name){
-        
+    public static function named($name)
+    {
         return (new static)->saveAs($name);
-
     }
 
-    protected function saveAs($name){
-        
+    protected function saveAs($name)
+    {
         $this->name = sprintf("%s-%s", time(), $name);
         $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
         $this->thumbnail_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);
@@ -37,8 +36,8 @@ class Photo extends Model
         return $this;
     }
 
-    public function move(UploadedFile $file){
-        
+    public function move(UploadedFile $file)
+    {
         $file->move($this->baseDir, $this->name);
 
         $this->makeThumbnail();
@@ -46,8 +45,8 @@ class Photo extends Model
         return $this;
     }
 
-    public function makeThumbnail(){
-        
+    public function makeThumbnail()
+    {
         Image::make($this->path)
                 ->fit(200)
                 ->save($this->thumbnail_path);
