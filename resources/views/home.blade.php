@@ -1,24 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
 
-    <div id="base" class="col-lg-12">
-        <h3 class="page-header">Welcome, Please click the button to create a new flyer.</h3><br/>
-        <a  href="/flyers/create" class="btn btn-primary">Create flyer</a>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-        <!-- <ul>
-            <li v-for="name in names" v-text="name"></li>
-        </ul> -->
+                    You are logged in!
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- <script>
-    new Vue({
-        el: "#base",
-        data: {
-            names: ['Jane', 'John']
-            }
-    });
-
-    </script> -->
-
+</div>
 @endsection
