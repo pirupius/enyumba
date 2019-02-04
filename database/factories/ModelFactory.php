@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -26,11 +26,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $ugFaker = Faker\Factory::create('en_UG'); // create a French faker
 
 //flyer faker
-$factory->define(App\Flyers::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Flyers::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'user_id' => factory('App\User')->create()->id,
+        'user_id' => factory('App\Models\User')->create()->id,
         'name' => $ugFaker->cityPrefix,
         'area' => $ugFaker->streetName,
         'address' => $ugFaker->streetAddress,

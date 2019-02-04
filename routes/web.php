@@ -11,18 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'HomeController@index');
 
-    return view('home');
-});
-
-Route::resource('flyers', 'FlyersController');
-Route::get('/listings', 'FlyersController@allFlyers');
-
-Route::get('{area}/{address}', 'FlyersController@show');
-// Route::post('{area}/{address}/photos', 'FlyersController@addPhoto');
-Route::post('{area}/{address}/photos', ['as'=>'store_photo_path', 'uses'=>'FlyersController@addPhoto']);
+Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('flyers', 'FlyersController');
+
+Route::get('/listings', 'FlyersController@allFlyers');
+
+Route::get('{area}/{address}', 'FlyersController@show');
+
+// Route::post('{area}/{address}/photos', 'FlyersController@addPhoto');
+Route::post('{area}/{address}/photos', ['as'=>'store_photo_path', 'uses'=>'FlyersController@addPhoto']);

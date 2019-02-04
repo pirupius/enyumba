@@ -4,22 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\FlyerRequest;
-use App\Http\Controllers\Controller;
-use App\Http\Utilities\Country;
-use App\Flyer;
-use App\Photo;
 use Auth;
+use App\Models\Flyer;
+use App\Models\Photo;
+use App\Http\Requests\FlyerRequest;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FlyersController extends Controller
 {
-    
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth', ['except'=>['allFlyers','show']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +36,7 @@ class FlyersController extends Controller
     public function create()
     {
         //flash()->overlay('Welcome aboard', 'Thank you for signing up');
-        
+
         return view('flyers.create');
     }
 
@@ -50,7 +48,6 @@ class FlyersController extends Controller
      */
     public function store(FlyerRequest $request)
     {
-        
         $flyer = new Flyer($request->all());
         $flyer->user_id = Auth::user()->id;
 
@@ -70,60 +67,57 @@ class FlyersController extends Controller
      */
     public function show($area, $address)
     {
-        
         $flyer = Flyer::locatedAt($area, $address);
 
         return view('flyers.show', compact('flyer'));
     }
 
-    public function addPhoto($area, $address, Request $request){
-        
+    public function addPhoto($area, $address, Request $request)
+    {
         $this->validate($request, [
             'photo' => 'required|mimes:jpg,jpeg,png,bmp'
         ]);
 
         $flyer = Flyer::locatedAt($area, $address);
 
-        if(! $flyer->ownedBy(\Auth::user())){
-
+        if (! $flyer->ownedBy(\Auth::user())) {
             return $this->unauthorized($request);
         }
-        
+
         $photo = $this->makePhoto($request->file('photo'));
 
         $flyer->addPhoto($photo);
     }
 
-    protected function unauthorized(Request $request){
+    protected function unauthorized(Request $request)
+    {
+        if ($request->ajax()) {
+            return response(['message'=>'This is not your flyer'], 403);
+        }
 
-        if($request->ajax()){
-                return response(['message'=>'This is not your flyer'], 403);
-            }
+        flash('This is not your flyer');
 
-            flash('This is not your flyer');
-
-            return redirect('/');
+        return redirect('/');
     }
 
-    public function makePhoto(UploadedFile $file){
-        
+    public function makePhoto(UploadedFile $file)
+    {
+
         // return Photo::fromForm($file)->store($file);
         return Photo::named($file->getClientOriginalname())->move($file);
     }
 
-    public function allFlyers(Request $request){
+    public function allFlyers(Request $request)
+    {
         // $listings = Flyer::all(); //gets all results from flyer table
         $listings = Flyer::with('photo')->get();
 
         if (count($listings)) {
-            
             return view('flyers.all_flyers', compact('listings'));
             // return $listings;
-
-        }else{
+        } else {
             return "no records!! Please create new listings";
         }
-        
     }
 
     /**

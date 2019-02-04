@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,7 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function flyer(){
-        return $this->hasMany('App\Flyer');
+    public function flyer()
+    {
+        return $this->hasMany(Flyer::class);
     }
 }

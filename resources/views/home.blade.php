@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 
@@ -18,7 +18,7 @@
             names: ['Jane', 'John']
             }
     });
-    
+
     </script> -->
 
 @endsection
