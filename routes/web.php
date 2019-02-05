@@ -11,17 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-
-Route::get('/home', 'HomeController@index');
-
 Auth::routes();
+
+Route::get('/', 'FlyersController@index');
+Route::get('/listings', 'FlyersController@index');
 
 Route::resource('flyers', 'FlyersController');
 
-Route::get('/listings', 'FlyersController@allFlyers');
-
 Route::get('{area}/{address}', 'FlyersController@show');
 
-// Route::post('{area}/{address}/photos', 'FlyersController@addPhoto');
-Route::post('{area}/{address}/photos', ['as'=>'store_photo_path', 'uses'=>'FlyersController@addPhoto']);
+Route::post('{area}/{address}/photos', ['as' => 'store_photo_path', 'uses' => 'FlyersController@addPhoto']);

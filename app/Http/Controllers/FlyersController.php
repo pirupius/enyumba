@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use Auth;
 use App\Models\Flyer;
 use App\Models\Photo;
+use Illuminate\Http\Request;
 use App\Http\Requests\FlyerRequest;
-
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FlyersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except'=>['allFlyers','show']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -23,9 +21,15 @@ class FlyersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $listings = Flyer::with('photo')->get();
+
+        if (count($listings)) {
+            return view('flyers.index', compact('listings'));
+        } else {
+            return "no records!! Please create new listings";
+        }
     }
 
     /**
@@ -35,8 +39,6 @@ class FlyersController extends Controller
      */
     public function create()
     {
-        //flash()->overlay('Welcome aboard', 'Thank you for signing up');
-
         return view('flyers.create');
     }
 
@@ -52,11 +54,10 @@ class FlyersController extends Controller
         $flyer->user_id = Auth::user()->id;
 
         $flyer->save();
-        //Flyer::create($request->all());
 
         flash()->success('Success', 'New listing created successfully!');
 
-        return redirect()->back(); //return back
+        return redirect("/$flyer->area/$flyer->address");
     }
 
     /**
@@ -102,22 +103,7 @@ class FlyersController extends Controller
 
     public function makePhoto(UploadedFile $file)
     {
-
-        // return Photo::fromForm($file)->store($file);
         return Photo::named($file->getClientOriginalname())->move($file);
-    }
-
-    public function allFlyers(Request $request)
-    {
-        // $listings = Flyer::all(); //gets all results from flyer table
-        $listings = Flyer::with('photo')->get();
-
-        if (count($listings)) {
-            return view('flyers.all_flyers', compact('listings'));
-            // return $listings;
-        } else {
-            return "no records!! Please create new listings";
-        }
     }
 
     /**
