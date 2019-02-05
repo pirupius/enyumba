@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -13,11 +15,18 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!--Sweet alert files-->
+    <script src="{{asset('js/sweetalert-dev.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
+
+    <!--dropzone CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
 </head>
 <body>
     <div id="app">
@@ -33,7 +42,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="/flyers/create"><i class="fa fa-plus fa-fw"></i>Create Flyer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/listings"><i class="fa fa-table fa-fw"></i>All Flyers</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -51,7 +65,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    Howdy {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -73,8 +87,21 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                @yield('content')
+            </div>
         </main>
     </div>
+
+    @include('flash')
+
+    @yield('scripts.footer')
 </body>
 </html>
