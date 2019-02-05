@@ -12,6 +12,15 @@ This repo is based on a house listing scenario.
 
 ...more features will keep being added with time.
 
+## Setup
+1. git clone (project link)
+2. composer install
+3. cp .env.example .env (create an env file)
+4. change the db configurations based on your env file
+5. php artisan key:generate key
+6. php artisan migrate --seed
+7.install predis if its missing (composer require predis/predis:~1.0)
+
 ## Resources
 1. Video Tutorials from [Laracasts](https://laracasts.com/series/build-project-flyer-with-me)
 
