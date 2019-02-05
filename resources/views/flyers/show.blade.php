@@ -39,8 +39,7 @@
 @endsection
 
 @section('scripts.footer')
-    <script src="{{asset('js/dropzone.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
     <script>
         Dropzone.options.addPhotosForm = {
             paramName: 'photo',
