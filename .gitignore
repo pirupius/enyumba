@@ -11,3 +11,5 @@ npm-debug.log
 yarn-error.log
 
 /public/img/flyers
+
+**/*.DS_Store
